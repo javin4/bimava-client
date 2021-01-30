@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    
+ 
+    <MainLayout></MainLayout>
+
   </div>
 </template>
 
@@ -30,3 +29,16 @@
   color: #42b983;
 }
 </style>
+<script>
+import MainLayout from './components/Layouts/MainLayout'
+export default {
+  data () {
+    return {
+      
+    }
+  },
+  components: {
+    MainLayout
+  }
+}
+</script>
