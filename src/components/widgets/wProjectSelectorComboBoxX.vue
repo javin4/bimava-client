@@ -5,7 +5,7 @@
         <td text-align="right">  
     <Label for="c1" align="top">Projekt: </Label>
     </td>
-    <td ><ComboBox inputId="c1" v-model="currentProjectid" 
+    <td ><ComboBox inputId="c1" v-model="currentProject" 
     valueField="id"
     textField=name 
     :data="projects">
@@ -23,7 +23,6 @@ import gql from 'graphql-tag'
 export default {
   data() {
     return {
-      currentProjectid: null,
       currentProject: null,
     };
   },

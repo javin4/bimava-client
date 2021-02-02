@@ -17,23 +17,19 @@
 </template>
  
 <script>
-import gql from 'graphql-tag'
+//import gql from 'graphql-tag'
+import query from '@/graphql/project/all.gql'
 export default {
     data() {
         return {
             total: 1000,
             data: [],
-            pageSize: 20
+            pageSize: 20,
+            query: null
         };
     },
     apollo:{
-        projects: gql`{ 
-            projects{
-                id
-                name
-                kennung
-            }
-        }`,
+        projects: query
     }
 };
 </script>

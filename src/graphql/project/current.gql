@@ -1,12 +1,13 @@
 query {
-  currentProject(id: "9a4208ba-27da-405c-b484-f386ba48f00b"){
+  currentProject(id: "9a4208ba-27da-405c-b484-f386ba48f00b")
+  {
     id
-    name
     kennung
-    lvs{
+    name
+    lvs(orderBy:[{column:"kennung", order:ASC}]){
       id
-      name
       kennung
+      name
     }
   }
 }
