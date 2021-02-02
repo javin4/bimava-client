@@ -19,7 +19,7 @@
 
       <LayoutPanel region="center" style="height: 500px">
         <slot />
-        <sort-grid />
+
 
       </LayoutPanel>
     </Layout>
@@ -58,7 +58,6 @@ import PanelNavigation from '../Panel/Navigation.vue';
 import PanelEast from '../Panel/East';
 import PanelNorth from "../Panel/North";
 import PanelSouth from '../Panel/South';
-import SortGrid from '../widgets/sortGrid.vue';
 
 export default {
   data() {
@@ -69,7 +68,6 @@ export default {
     PanelSouth,
     PanelEast,
     PanelNavigation,
-    SortGrid,
 
  /*     
       PanelEast,

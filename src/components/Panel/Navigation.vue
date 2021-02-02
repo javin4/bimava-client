@@ -9,7 +9,12 @@
                         <!--<span class="count">124</span>-->
                     </div>
                 </template>
-                <Tree :data="ProjectTreeData"></Tree>
+                <Tree :data="ProjectTreeData">
+                    <template slot-scope="scope">
+                      <router-link v-if="scope.node.Path" :to="scope.node.Path">{{scope.node.text}}</router-link> 
+                      <span v-else>{{scope.node.text}}</span>
+                    </template>
+                </Tree>
             </AccordionPanel>
             <AccordionPanel iconCls="fas fa-archive" bodyCls="f-row">
                 <template slot="header">
@@ -18,24 +23,28 @@
                         <!--<span class="count">1,024</span>-->
                     </div>
                 </template>
-                 <Tree :data="SystemTreeData"></Tree>
-               
+                <Tree 
+                  :data="VorlagenTreeData"
+                >
+                    <template slot-scope="scope">
+                      <router-link v-if="scope.node.Path" :to="scope.node.Path">{{scope.node.text}}</router-link> 
+                        <span v-else>{{scope.node.id}} - {{scope.node.text}}</span>
+                    </template>
+                </Tree>
+     
+
             </AccordionPanel>
             <AccordionPanel :title="'System'" iconCls="fas fa-cog">
-                <Tabs class="f-full" :border="false">
-                    <TabPanel :title="'Java'">
-                        <p>Java (Indonesian: Jawa) is an island of Indonesia. With a population of 135 million (excluding the 3.6 million on the island of Madura which is administered as part of the provinces of Java), Java is the world's most populous island, and one of the most densely populated places in the world.</p>
-                    </TabPanel>
-                    <TabPanel :title="'C#'">
-                        <p>C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.</p>
-                    </TabPanel>
-                    <TabPanel :title="'Ruby'">
-                        <p>A dynamic, reflective, general-purpose object-oriented programming language.</p>
-                    </TabPanel>
-                    <TabPanel :title="'Fortran'">
-                        <p>Fortran (previously FORTRAN) is a general-purpose, imperative programming language that is especially suited to numeric computation and scientific computing.</p>
-                    </TabPanel>
-                </Tabs>
+                                <Tree 
+                  :data="SystemTreeData"
+                >
+                    <template slot-scope="scope">
+                      
+                      <router-link v-if="scope.node.Path" :to="scope.node.Path">{{scope.node.text}}</router-link> 
+                        <span v-else>{{scope.node.id}} - {{scope.node.text}}</span>
+                    </template>
+                </Tree>
+     
             </AccordionPanel>
         </Accordion>
   </div>
@@ -54,19 +63,17 @@ export default {
           children: [
             {
               id: 11,
-              text: "Photos",
+              text: "Ausschreibungen",
               children: [
                 {
                   id: 111,
-                  text: "Friend"
+                  text: "BM Baumeister",
+                  Path:"LV"
                 },
                 {
                   id: 112,
-                  text: "Wife"
-                },
-                {
-                  id: 113,
-                  text: "Company"
+                  text: "TB Trockenbau",
+                  Path:"LV"
                 }
               ]
             },
@@ -173,13 +180,16 @@ export default {
         {
           id: 1,
           text: "Projekte",
-          iconCls:"icon-reload"
-        
+          Path:"/project"
         },
-                {
+        {
           id: 2,
-          text: "Projekte",
-        
+          text: "User",
+          Path:"/"
+        },
+          {
+          id: 3,
+          text: "kein Link"
         }
       ],
     };
@@ -210,5 +220,9 @@ export default {
 
 .accordion {
      height: 550px;
+}
+
+.tree-title a{
+  text-decoration: none;
 }
 </style>
