@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout style="width: 100%; height: 500px">
+    <Layout style="width: 100%; height: 800px">
       <LayoutPanel region="north" style="height: 100px">
         <panel-north />
       </LayoutPanel>
@@ -18,8 +18,8 @@
       </LayoutPanel>
 
       <LayoutPanel region="center" style="height: 500px">
-        <sort-grid />
-        <w-project-selector-combo-box />
+        <sort-grid-x />
+
       </LayoutPanel>
     </Layout>
 
@@ -55,17 +55,11 @@
 <script>
 import PanelNavigation from './components/Layout/PanelNavigation.vue';
 import PanelEast from './components/Layout/PanelEast';
-
 import PanelNorth from "./components/Layout/PanelNorth";
 import PanelSouth from './components/Layout/PanelSouth';
-import SortGrid from './components/Layout/sortGrid.vue';
-import WProjectSelectorComboBox from './components/widgets/wProjectSelectorComboBox.vue';
+//import SortGrid from '@/components/widgets/sortGrid.vue';
+import SortGridX from './components/widgets/sortGridX.vue';
 
-/*
-import PanelEast from "./components/Layout/PanelEast.vue";
-
-
-import PanelSouth from "./components/Layout/PanelSouth";*/
 export default {
   data() {
     return {};
@@ -74,9 +68,9 @@ export default {
     PanelNorth,
     PanelSouth,
     PanelEast,
-    SortGrid,
+ //   SortGrid,
     PanelNavigation,
-    WProjectSelectorComboBox,
+    SortGridX,
 
  /*     
       PanelEast,

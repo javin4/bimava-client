@@ -1,35 +1,45 @@
 <template>
     <div>
-        <h2>Basic ComboBox</h2>
-        <Label for="c1" align="top">Select a value:</Label>
-        <ComboBox inputId="c1" v-model="value" :data="data"></ComboBox>
-    <p v-if="value">Selected value: {{value}}</p>
+    <select v-model="currentProject">    
+       <option v-for="project in projects" :key="project.id" v-bind:value="project">
+        {{project.kennung}}  {{project.name}}
+       </option>
+    </select>
+    <div>Selected: {{currentProject}}</div>
     </div>
 </template>
  
 <script>
+import gql from 'graphql-tag'
 export default {
   data() {
     return {
-      value: 11,
-      data: this.getData()
+      currentProject: null,
     };
   },
   methods: {
-    getData() {
-      return [
-        { value: 11, text: "Mr. Nice" },
-        { value: 12, text: "Narco" },
-        { value: 13, text: "Bombasto" },
-        { value: 14, text: "Celeritas" },
-        { value: 15, text: "Magneta" },
-        { value: 16, text: "RubberMan" },
-        { value: 17, text: "Dynama" },
-        { value: 18, text: "Dr IQ" },
-        { value: 19, text: "Magma" },
-        { value: 20, text: "Tornado" }
-      ];
+  },
+      apollo:{
+        projects: gql`{ 
+            projects{
+                id
+                name
+                kennung
+            }
+        }`,
     }
-  }
 };
 </script>
+<style scoped>
+select {
+  font-size: 14px;
+  padding: 0 4px;
+      border-radius: 5px 5px 5px 5px;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .combo-arrow {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAALklEQVR42mNgGAXUBcbGxv9BmFx5uAJsivDJEVRItGZsGkjWjMsQmgTqKKASAADJyyyhLrHD5wAAAABJRU5ErkJggg==) no-repeat center center;
+}
+</style>

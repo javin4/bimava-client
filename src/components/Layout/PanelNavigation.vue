@@ -1,6 +1,7 @@
 <template>
   <div heigth="100%">
-        <Accordion style="height:250px">
+                <w-project-selector-combo-box-x />
+        <Accordion>
             <AccordionPanel iconCls="icon-man" headerCls="hd">
                 <template slot="header">
                     <div class="panel-title panel-with-icon">Projekt</div>
@@ -41,6 +42,8 @@
 </template>
  
 <script>
+import WProjectSelectorComboBoxX from '../widgets/wProjectSelectorComboBoxX.vue';
+
 export default {
   data() {
     return {
@@ -180,6 +183,9 @@ export default {
         }
       ],
     };
+  },
+  components: {
+        WProjectSelectorComboBoxX,
   }
 };
 </script>
@@ -199,5 +205,10 @@ export default {
   font-size: 12px;
   line-height: 16px;
   height: 16px;
+}
+
+
+.accordion {
+     height: 550px;
 }
 </style>

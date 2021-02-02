@@ -1,0 +1,12 @@
+query {
+  projects{
+    id
+    name
+    kennung
+    lvs{
+      id
+      name
+      kennung
+    }
+  }
+}

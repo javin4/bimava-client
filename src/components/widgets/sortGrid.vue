@@ -4,7 +4,8 @@
                 :virtualScroll="true"
                 :data="projects"
                 :total="total"
-                :pageSize="pageSize">
+                :pageSize="pageSize"
+                             >
             <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
             <GridColumn field="name" title="Projekt Bezeichnung" :sortable="true"></GridColumn>
             <GridColumn field="amount" title="Amount" align="right" :sortable="true"></GridColumn>

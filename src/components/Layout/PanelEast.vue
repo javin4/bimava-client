@@ -1,10 +1,22 @@
 <template>
-          <div class="title">East Region</div>
+          <div class="title">East Region
+              <test-project-list />
+   
+          </div>
 </template>
 
 <script>
-export default {
+import testProjectList from '../widgets/testProjectList.vue'
 
+export default {
+  components: { testProjectList },
+    name:"test",
+    data () {
+        return
+    },
+    methods() {
+
+    }
 }
 </script>
 
