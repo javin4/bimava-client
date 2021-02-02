@@ -1,78 +1,16 @@
 <template>
-  <div>
-    <Layout style="width: 100%; height: 800px">
-      <LayoutPanel region="north" style="height: 100px">
-        <panel-north />
-      </LayoutPanel>
-      
-      <LayoutPanel region="south" style="height: 50px">
-        <panel-south />
-      </LayoutPanel>
-
-       <LayoutPanel region="west" title="Navigation" :collapsible="true" :collapsed="false" :expander="true" style="width:300px;">   
-        <panel-navigation />
-      </LayoutPanel>
-      
-      <LayoutPanel region="east" title="Eigenschaften" :collapsible="true" :collapsed="true" :expander="true" style="width:350px;">
-        <panel-east />
-      </LayoutPanel>
-
-      <LayoutPanel region="center" style="height: 500px">
-        <sort-grid />
-
-      </LayoutPanel>
-    </Layout>
-
-  </div>
+  <component :is="layout">
+    <router-view :layout.sync="layout"/>
+  </component>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  
-}
-* {
-    font-family: Roboto,Arial,Helvetica;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 <script>
-import PanelNavigation from './components/Panel/Navigation.vue';
-import PanelEast from './components/Panel/East';
-import PanelNorth from "./components/Panel/North";
-import PanelSouth from './components/Panel/South';
-import SortGrid from './components/widgets/sortGrid.vue';
-
 export default {
+  name: 'App',
   data() {
-    return {};
-  },
-  components: {
-    PanelNorth,
-    PanelSouth,
-    PanelEast,
-    PanelNavigation,
-    SortGrid,
-
- /*     
-      PanelEast,
-  */
+    return {
+      layout: 'div',
+    };
   },
 };
 </script>
