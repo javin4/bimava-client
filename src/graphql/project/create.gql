@@ -1,0 +1,13 @@
+mutation(
+  $name: String!
+  $kennung: String!
+){
+  createProject(
+    name:$name
+  	kennung:$kennung
+  ){
+    id
+    name
+    kennung
+  }
+}
