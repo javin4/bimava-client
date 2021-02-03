@@ -1,6 +1,6 @@
 <template>
   <div>
-    test2
+    test
     <Layout style="width: 100%; height: 800px">
       <LayoutPanel region="north" style="height: 100px">
         <panel-north />
@@ -14,7 +14,13 @@
         <panel-navigation />
       </LayoutPanel>
       
-   <slot />
+      <LayoutPanel region="east" title="Eigenschaften" :collapsible="true" :collapsed="true" :expander="true" style="width:350px;">
+        <panel-east />
+      </LayoutPanel>
+
+      <LayoutPanel region="center" style="height: 200px">
+        <slot />
+      </LayoutPanel>
     </Layout>
 
   </div>
@@ -48,6 +54,7 @@
 </style>
 <script>
 import PanelNavigation from '../Panel/Navigation.vue';
+import PanelEast from '../Panel/East';
 import PanelNorth from "../Panel/North";
 import PanelSouth from '../Panel/South';
 
@@ -58,11 +65,8 @@ export default {
   components: {
     PanelNorth,
     PanelSouth,
+    PanelEast,
     PanelNavigation,
-
- /*     
-      PanelEast,
-  */
   },
 };
 </script>

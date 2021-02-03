@@ -1,5 +1,7 @@
-query {
-  currentProject(id: "9a4208ba-27da-405c-b484-f386ba48f00b")
+query(
+  $currentProjectid:String!
+  ) {
+  currentProject(id:  $currentProjectid)
   {
     id
     kennung

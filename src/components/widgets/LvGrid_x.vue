@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h2>Dialog Editing</h2>
+        <h2>LV Editing</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-        <DataGrid :data="projects" style="height:250px">
+        <DataGrid :data="currentProject" style="height:250px">
             <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
             <GridColumn field="name" title="Projekt Bezeichnung" :sortable="true"></GridColumn>
             <GridColumn field="Gesamtkosten" title="GEK Gesamtkosten" align="right" :sortable="true"></GridColumn>
@@ -22,6 +22,7 @@
                 </template>
       </GridColumn>
         </DataGrid>
+        <!--
     <Dialog ref="dlg" bodyCls="f-column" :title="title" :modal="true" closed :dialogStyle="{height:'300px'}">
       <div class="f-full" style="overflow:auto">
       <Form ref="form" :model="model" :rules="rules" @validate="errors=$event" style="padding:20px 50px">
@@ -35,7 +36,7 @@
           <TextBox inputId="name" name="name" v-model="model.name"></TextBox>
           <div class="error">{{getError('name')}}</div>
         </div>
-        <!--<div style="margin-bottom:20px">
+        <div style="margin-bottom:20px">
           <Label for="listprice">List Price:</Label>
           <NumberBox inputId="listprice" name="listprice" :precision="1" v-model="model.listprice"></NumberBox>
         </div>
@@ -50,37 +51,44 @@
         <div style="margin-bottom:20px">
           <Label for="status">Status:</Label>
           <CheckBox inputId="status" name="status" v-model="model.status"></CheckBox>
-        </div>-->
+        </div>
       </Form>
       </div>
       <div class="buttons f-noshrink">
         <LinkButton @click="saveRow()">Save</LinkButton>
         <LinkButton @click="$refs.dlg.close()">Cancel</LinkButton>
       </div>
-    </Dialog>
+    </Dialog>-->
     </div>
 </template>
  
 <script>
-    import getAllProjects from '@/graphql/project/all.gql'
+    import qGetCurrentProjects from '@/graphql/project/current.gql'
     export default {
-        data() {
-            return {
-        data: [],
-        title: '',
-        model: {
-          kennung: null,
-          name: null,
-        },
-        rules: {
-          kennung: 'required',
-          name: 'required'
-        },
-        errors: {},
-        editingRow: null
-            }
-        },
+      name:"test",
+      data() {
+        return {
+          data: [],
+          title: '',
+          model: {
+            kennung: null,
+            name: null,
+          },
+          rules: {
+            kennung: 'required',
+            name: 'required'
+          },
+          errors: {},
+          editingRow: null,
+          $currentProjectid:'9a4208ba-27da-405c-b484-f386ba48f00b',
+          currentProject:null
+        }
+      },
+    created () {
+      this.currentProjectid = "9a4208ba-27da-405c-b484-f386ba48f00b"
+    },
     methods: {
+       
       addRow(){
         this.model = {
           itemid: null,
@@ -136,9 +144,11 @@
       }
     },
     apollo:{
-        projects: getAllProjects
+        
+          currentProject: qGetCurrentProjects,
+      
     }
-    }
+  }
 </script>
 <style>
 .buttons{

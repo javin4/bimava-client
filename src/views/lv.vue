@@ -1,11 +1,12 @@
 <template>
+   
    <Layout style="width: 100%; height: 800px">
       <LayoutPanel region="east" title="Eigenschaften" :collapsible="true" :collapsed="true" :expander="true" style="width:350px;">
         <add-project/>
       </LayoutPanel>
 
       <LayoutPanel region="center" style="">
-        <project-grid />
+        <lv-grid />
      
       </LayoutPanel>
 
@@ -15,12 +16,12 @@
 <script>
 import LayoutDefault from '../components/Layout/Default.vue';
 import AddProject from '../components/widgets/AddProject.vue';
-import ProjectGrid from '../components/widgets/ProjectGrid.vue';
+import LvGrid from '../components/widgets/LvGrid.vue';
 //import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
 
 export default {
   components: { 
-    ProjectGrid,
+    LvGrid,
     AddProject,
 //    LayoutDefaultDynamic,
   },

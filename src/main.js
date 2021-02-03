@@ -17,3 +17,4 @@ new Vue({
   apolloProvider: createProvider(),
   render: h => h(App)
 }).$mount('#app')
+

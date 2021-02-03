@@ -1,6 +1,6 @@
 <template>
   <div heigth="100%">
-                <w-project-selector-combo-box-x />
+                <w-project-selector-combo-box />
         <Accordion>
             <AccordionPanel iconCls="icon-man" headerCls="hd">
                 <template slot="header">
@@ -51,7 +51,7 @@
 </template>
  
 <script>
-import WProjectSelectorComboBoxX from '../widgets/wProjectSelectorComboBoxX.vue';
+import WProjectSelectorComboBox from '../widgets/wProjectSelectorComboBox.vue';
 
 export default {
   data() {
@@ -64,6 +64,7 @@ export default {
             {
               id: 11,
               text: "Ausschreibungen",
+              Path:"/",
               children: [
                 {
                   id: 111,
@@ -195,7 +196,7 @@ export default {
     };
   },
   components: {
-        WProjectSelectorComboBoxX,
+        WProjectSelectorComboBox,
   }
 };
 </script>
