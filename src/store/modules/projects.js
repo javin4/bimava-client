@@ -21,8 +21,17 @@ const actions = {
     },
 
     async addProject({commit},project ){
-        const response = await axios.post('http://bimavarest.loc/api/project',project)
-        //console.log (response)
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+          };
+
+        const response = await axios.post('http://bimavarest.loc/api/project',project,axiosConfig)
+        .catch(error => { 
+            console.log("ERRRR:: ",error.response.data);
+        });
         commit('newProject',response.data)
     }
 

@@ -5,8 +5,7 @@
       </LayoutPanel>
 
       <LayoutPanel region="center" style="">
-        <project-grid />
-     
+        <projects-grid />
       </LayoutPanel>
 
    </Layout>
@@ -14,13 +13,13 @@
 
 <script>
 import LayoutDefault from '@/components/layout/Default.vue';
-import AddProject from '@/components/widgets/AddProject.vue';
-import ProjectGrid from '@/components/widgets/ProjectGrid.vue';
+import AddProject from '@/components/widgets/projects/AddProject.vue';
+import ProjectsGrid from '@/components/widgets/projects/ProjectsGrid.vue';
 //import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
 
 export default {
   components: { 
-    ProjectGrid,
+    ProjectsGrid,
     AddProject,
 //    LayoutDefaultDynamic,
   },

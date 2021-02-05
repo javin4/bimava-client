@@ -2,7 +2,7 @@
     <div>
         <h2>Dialog Editing</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-        <DataGrid :data="projects" style="height:250px">
+        <DataGrid :data="allProjects" style="height:250px">
             <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
             <GridColumn field="name" title="Projekt Bezeichnung" :sortable="true"></GridColumn>
             <GridColumn field="Gesamtkosten" title="GEK Gesamtkosten" align="right" :sortable="true"></GridColumn>
@@ -62,10 +62,10 @@
 </template>
  
 <script>
-    import getAllProjects from '@/graphql/project/all.gql'
-    export default {
-        data() {
-            return {
+  import { mapGetters, mapActions } from 'vuex'
+  export default {
+    data() {
+      return {
         data: [],
         title: '',
         model: {
@@ -79,8 +79,9 @@
         errors: {},
         editingRow: null
             }
-        },
+      },
     methods: {
+      ...mapActions(['fetchProjects']),
       addRow(){
         this.model = {
           itemid: null,
@@ -135,10 +136,11 @@
         return this.getError(name) != null;
       }
     },
-    apollo:{
-        projects: getAllProjects
-    }
-    }
+    computed: mapGetters(["allProjects"]),
+   /* created() {
+        this.fetchProjects();
+    }*/
+  }
 </script>
 <style>
 .buttons{
