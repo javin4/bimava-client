@@ -1,0 +1,8 @@
+mutation($text: String) {
+    addItem(text: $text) @client{
+        id
+        text
+        done
+    }
+}
+

@@ -2,12 +2,12 @@
    
    <Layout style="width: 100%; height: 800px">
       <LayoutPanel region="east" title="Eigenschaften" :collapsible="true" :collapsed="true" :expander="true" style="width:350px;">
-        <add-project/>
+        <add-item/>
       </LayoutPanel>
 
       <LayoutPanel region="center" style="">
         <lv-grid />
-     
+       {{ todoItems }}
       </LayoutPanel>
 
    </Layout>
@@ -15,19 +15,24 @@
 
 <script>
 import LayoutDefault from '../components/Layout/Default.vue';
-import AddProject from '../components/widgets/AddProject.vue';
+import AddItem from '../components/widgets/AddItem.vue';
 import LvGrid from '../components/widgets/LvGrid.vue';
-//import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
+import { todoItemsQuery } from "@/graphql/queries.js"
 
 export default {
   components: { 
     LvGrid,
-    AddProject,
-//    LayoutDefaultDynamic,
+    AddItem,
   },
   name: 'ProjectView',
   created() {
     this.$emit('update:layout', LayoutDefault);
   },
+    apollo: {
+    todoItems: {
+      query: todoItemsQuery
+    }
+  },
+
 };
 </script>
