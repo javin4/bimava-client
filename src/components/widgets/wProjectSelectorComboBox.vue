@@ -25,10 +25,11 @@
       };
     },
     methods: {
-      ...mapActions(['fetchProjects']),
+      ...mapActions(['fetchProjects','fetchOneProject']),
       onChange:function(event){
         console.log(event.target.value);
-        this.testvar = event.target.value;
+      //  this.state.activeProject = event.target.value;
+        this.fetchOneProject(this.currentProjectId);
       }
     },
     computed: mapGetters(["allProjects"]),

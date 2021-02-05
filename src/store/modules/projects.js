@@ -5,11 +5,15 @@ const state = {
         { id: 1, name: "Project 1", kennung:"aaa" },
         { id: 2, name: "Project 2", kennung:"bbb"  },
         { id: 3, name: "Project 3", kennung:"ccc"  }
+    ],
+    activeProject: [
+        { id: 1, name: "Project 1", kennung:"aaa" },
     ]
 }
 
 const getters = {
-    allProjects: state => state.projects
+    allProjects: state => state.projects,
+    activeProject: state => state.activeProject,
 }
 
 const actions = {
@@ -18,6 +22,13 @@ const actions = {
         console.log("fetching projects")
         console.log(response.data)
         commit('setProjects',response.data)
+    },
+
+    async fetchOneProject({commit},projectId) {
+        const response = await axios.get(`http://bimavarest.loc/api/project/${projectId}`)
+        console.log("fetching one project")
+        console.log(response.data)
+        commit('setActiveProject',response.data)
     },
 
     async addProject({commit},project ){
@@ -39,7 +50,8 @@ const actions = {
 
 const mutations  = {
     setProjects: (state, projects) => (state.projects = projects),
-    newProject: (state, project) => state.projects.unshift(project)
+    newProject: (state, project) => state.projects.unshift(project),
+    setActiveProject:(state, project) => (state.activeProject = project)
 }
 
 export default {

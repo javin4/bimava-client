@@ -1,5 +1,0 @@
-  type Item {
-    id: ID!
-    text: String!
-    done: Boolean!
-  }
