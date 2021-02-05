@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import LayoutDefault from '../components/Layout/Default.vue';
-import AddItem from '../components/widgets/AddItem.vue';
-import LvGrid from '../components/widgets/LvGrid.vue';
+import LayoutDefault from '@/components/layout/Default.vue';
+import AddItem from '@/components/widgets/AddItem.vue';
+import LvGrid from '@/components/widgets/LvGrid.vue';
 import { todoItemsQuery } from "@/graphql/queries.js"
 
 export default {

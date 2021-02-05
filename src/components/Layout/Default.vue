@@ -47,9 +47,9 @@
 }
 </style>
 <script>
-import PanelNavigation from '../Panel/Navigation.vue';
-import PanelNorth from "../Panel/North";
-import PanelSouth from '../Panel/South';
+import PanelNavigation from '@/components/panel/Navigation.vue';
+import PanelNorth from "@/components/panel/North";
+import PanelSouth from '@/components/panel/South';
 
 export default {
   data() {
@@ -59,10 +59,6 @@ export default {
     PanelNorth,
     PanelSouth,
     PanelNavigation,
-
- /*     
-      PanelEast,
-  */
   },
 };
 </script>

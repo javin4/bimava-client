@@ -10,7 +10,7 @@
 
 <script>
 //import LayoutDefault2 from '../components/Layout/Default2.vue';
-import LayoutDefaultDynamic2 from '../components/Layout/LayoutDefaultDynamic2.js';
+import LayoutDefaultDynamic2 from '@/components/layout/LayoutDefaultDynamic2.js';
 
 export default {
   name: 'Home',

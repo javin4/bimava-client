@@ -1,5 +1,5 @@
 // src/layouts/LayoutDefaultDynamic.js
-import LayoutDefault2 from '@/components/Layout/Default2.vue';
+import LayoutDefault2 from '@/components/layout/Default2.vue';
 
 export default {
   name: 'LayoutDefaultDynamic',

@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import LayoutDefault from '../components/Layout/Default.vue';
-import AddProject from '../components/widgets/AddProject.vue';
-import ProjectGrid from '../components/widgets/ProjectGrid.vue';
+import LayoutDefault from '@/components/layout/Default.vue';
+import AddProject from '@/components/widgets/AddProject.vue';
+import ProjectGrid from '@/components/widgets/ProjectGrid.vue';
 //import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
 
 export default {
