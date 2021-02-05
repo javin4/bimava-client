@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Dialog Editing</h2>
+        <h2>LVs</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
         <DataGrid :data="allProjects" style="height:250px">
             <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
@@ -35,6 +35,22 @@
           <TextBox inputId="name" name="name" v-model="model.name"></TextBox>
           <div class="error">{{getError('name')}}</div>
         </div>
+        <!--<div style="margin-bottom:20px">
+          <Label for="listprice">List Price:</Label>
+          <NumberBox inputId="listprice" name="listprice" :precision="1" v-model="model.listprice"></NumberBox>
+        </div>
+        <div style="margin-bottom:20px">
+          <Label for="unitcost">Unit Cost:</Label>
+          <NumberBox inputId="unitcost" name="unitcost" v-model="model.unitcost"></NumberBox>
+        </div>
+        <div style="margin-bottom:20px">
+          <Label for="attr">Attribute:</Label>
+          <TextBox inputId="attr" name="attr" v-model="model.attr"></TextBox>
+        </div>
+        <div style="margin-bottom:20px">
+          <Label for="status">Status:</Label>
+          <CheckBox inputId="status" name="status" v-model="model.status"></CheckBox>
+        </div>-->
       </Form>
       </div>
       <div class="buttons f-noshrink">

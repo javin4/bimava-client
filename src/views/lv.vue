@@ -6,8 +6,7 @@
       </LayoutPanel>
 
       <LayoutPanel region="center" style="">
-        <lv-grid />
-       {{ todoItems }}
+        <lvs-grid />
       </LayoutPanel>
 
    </Layout>
@@ -16,12 +15,12 @@
 <script>
 import LayoutDefault from '@/components/layout/Default.vue';
 import AddItem from '@/components/widgets/AddItem.vue';
-import LvGrid from '@/components/widgets/LvGrid.vue';
+import LvsGrid from '@/components/widgets/lvs/LvsGrid.vue';
 import { todoItemsQuery } from "@/graphql/queries.js"
 
 export default {
   components: { 
-    LvGrid,
+    LvsGrid,
     AddItem,
   },
   name: 'ProjectView',
