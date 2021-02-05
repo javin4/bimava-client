@@ -9,7 +9,7 @@ const state = {
     activeProject: [
       //  { id: 1, name: "Project 1", kennung:"aaa" },
     ],
-    activeProjectid: "sdfsdf"
+    activeProjectid: "1"
 }
 
 const getters = {

@@ -60,11 +60,12 @@ export default {
         {
           id: 1,
           text: "Projektdaten",
+          Path:"/projectDetail",
           children: [
             {
               id: 11,
               text: "Ausschreibungen",
-              Path:"/",
+              Path:"/lvs",
               children: [
                 {
                   id: 111,

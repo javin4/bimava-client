@@ -22,11 +22,8 @@ const actions = {
     },
 
     async fetchLVsByProject({commit},Project) {
-        //Project = '"project_id":"9a4208ba-27da-405c-b484-f386ba48f00b"'
         const response = await axios.post('/lvs',Project)
         console.log("fetching LVs by Project", Project)
-        //console.log(Project)
-        //console.log(response.data)
         commit('setLVs',response.data)
     },
 }

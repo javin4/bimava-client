@@ -1,7 +1,10 @@
 <template>
     <div>
         <h2>LVs</h2>
-    
+    <span v-if="activeProjectid==='1'">
+    Bitte wählen sie zu erst ein Projekt aus</span>
+    <span v-else>
+
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
         <DataGrid v-if="allLVs" :data="allLVs" style="height:250px">
             <GridColumn field="kennung" title="LV Kennung" align="left" :sortable="true" width="10%"></GridColumn>
@@ -18,14 +21,15 @@
                 </ButtonGroup>
                 </template>
             </GridColumn>
-
         </DataGrid>
         <div v-else> Keine LVs</div>
+    </span>
+    
     <Dialog ref="dlg" bodyCls="f-column" :title="title" :modal="true" closed :dialogStyle="{height:'300px'}">
       <div class="f-full" style="overflow:auto">
       <Form ref="form" :model="model" :rules="rules" @validate="errors=$event" style="padding:20px 50px">
         <div style="margin-bottom:20px">
-          <Label for="kennung">Projekt Kennung:</Label>
+          <Label for="kennung">LV Kennung:</Label>
           <TextBox inputId="kennung" name="kennung" v-model="model.kennung"></TextBox>
           <div class="error">{{getError('kennung')}}</div>
         </div>
@@ -41,12 +45,11 @@
         <LinkButton @click="$refs.dlg.close()">Cancel</LinkButton>
       </div>
     </Dialog>
-            {{activeProject}}
     </div>
 </template>
  
 <script>
-  import { mapGetters, mapActions, mapState } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   export default {
     data() {
       return {
@@ -120,37 +123,19 @@
       hasError(name) {
         return this.getError(name) != null;
       },
-      subscribe(){
-   // console.log("test");
-      }
     },
     computed: {
-      ...mapGetters(['allLVs','activeProject','activeProjectid']),
-      ...mapState(['activeProject']),
+      ...mapGetters(['allLVs','activeProject','activeProjectid'])
     },
     created() {
-      // this.fetchAllLVs();
       this.fetchLVsByProject({
-        //project_id: this.activeProject.id
-          project_id:"9a4208ba-27da-405c-b484-f386ba48f00b"
+            project_id: this.activeProjectid
       });
-      this.subscribe(),
       this.unsubscribe = this.$store.subscribe((mutation) => {
         if (mutation.type === 'setActiveProjectId') {
-          console.log(`Here: ${this.activeProjectid}`);
-          
-          /* Do whatever makes sense now
-            if (state.status === 'success') {
-              this.complex = {
-                deep: 'some deep object',
-              };
-            }
-          */
-
-            this.fetchLVsByProject({
-              project_id: this.activeProjectid
-              //  project_id:"9a4208ba-27da-405c-b484-f386ba48f00b"
-            });
+          this.fetchLVsByProject({
+            project_id: this.activeProjectid
+          });
         }
       });
     },

@@ -18,12 +18,13 @@ import ProjectsGrid from '@/components/widgets/projects/ProjectsGrid.vue';
 //import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
 
 export default {
+  name: 'ProjectsView',
   components: { 
     ProjectsGrid,
     AddProject,
 //    LayoutDefaultDynamic,
   },
-  name: 'ProjectView',
+
   created() {
     this.$emit('update:layout', LayoutDefault);
   },
