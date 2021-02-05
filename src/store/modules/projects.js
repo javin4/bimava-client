@@ -7,13 +7,19 @@ const state = {
         { id: 3, name: "Project 3", kennung:"ccc"  }
     ],
     activeProject: [
-        { id: 1, name: "Project 1", kennung:"aaa" },
-    ]
+      //  { id: 1, name: "Project 1", kennung:"aaa" },
+    ],
+    activeProjectid: "sdfsdf"
 }
 
 const getters = {
     allProjects: state => state.projects,
     activeProject: state => state.activeProject,
+    activeProjectid: state => state.activeProjectid,
+        active(state) {
+            return state.activeProject;
+        }
+    
 }
 
 const actions = {
@@ -28,6 +34,10 @@ const actions = {
         const response = await axios.get(`/project/${projectId}`)
         commit('setActiveProject',response.data)
         console.log ('User XXX works on project:' ,projectId)
+    },
+
+    changeActiveProjectId({commit},projectId) {
+        commit('setActiveProjectId',projectId)
     },
 
     async addProject({commit},project ){
@@ -56,6 +66,7 @@ const actions = {
 const mutations  = {
     setProjects: (state, projects) => (state.projects = projects),
     setActiveProject:(state, project) => (state.activeProject = project),
+    setActiveProjectId:(state,projectId) => (state.activeProjectid = projectId),
     newProject: (state, project) => state.projects.unshift(project),
     removeProject: (state, id) => (state.projects = state.projects.filter(project => project.id !== id)),
     editProject: (state, updProject) => {

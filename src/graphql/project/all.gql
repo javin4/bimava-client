@@ -1,8 +1,0 @@
-query {
-  projects(orderBy:[{column:"kennung", order:ASC}])
-  {
-    id
-    kennung
-    name
-  }
-}

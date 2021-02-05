@@ -1,18 +1,15 @@
 <template>
     <div>
         <h2>LVs</h2>
+    
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-        <DataGrid :data="allProjects" style="height:250px">
-            <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
-            <GridColumn field="name" title="Projekt Bezeichnung" :sortable="true"></GridColumn>
+        <DataGrid v-if="allLVs" :data="allLVs" style="height:250px">
+            <GridColumn field="kennung" title="LV Kennung" align="left" :sortable="true" width="10%"></GridColumn>
+            <GridColumn field="name" title="LV Bezeichnung" :sortable="true"></GridColumn>
             <GridColumn field="Gesamtkosten" title="GEK Gesamtkosten" align="right" :sortable="true"></GridColumn>
             <GridColumn field="id" title="Uuid" :sortable="true"></GridColumn>
+            <GridColumn field="project_id" title="project_id" align="left"></GridColumn>
             <GridColumn field="note" title="Anmerkungen"></GridColumn>
-            <GridColumn field="status" title="Status" align="center">
-                <template slot="body" slot-scope="scope">
-                {{scope.row.status ? 'T' : ''}}
-                </template>
-            </GridColumn>
             <GridColumn field="act" title="Actions" width="100px" align="center">
                  <template slot="body" slot-scope="scope">
                 <ButtonGroup style="height:24px">
@@ -20,8 +17,10 @@
                     <LinkButton @click="deleteRow(scope.row)">Delete</LinkButton>
                 </ButtonGroup>
                 </template>
-      </GridColumn>
+            </GridColumn>
+
         </DataGrid>
+        <div v-else> Keine LVs</div>
     <Dialog ref="dlg" bodyCls="f-column" :title="title" :modal="true" closed :dialogStyle="{height:'300px'}">
       <div class="f-full" style="overflow:auto">
       <Form ref="form" :model="model" :rules="rules" @validate="errors=$event" style="padding:20px 50px">
@@ -35,22 +34,6 @@
           <TextBox inputId="name" name="name" v-model="model.name"></TextBox>
           <div class="error">{{getError('name')}}</div>
         </div>
-        <!--<div style="margin-bottom:20px">
-          <Label for="listprice">List Price:</Label>
-          <NumberBox inputId="listprice" name="listprice" :precision="1" v-model="model.listprice"></NumberBox>
-        </div>
-        <div style="margin-bottom:20px">
-          <Label for="unitcost">Unit Cost:</Label>
-          <NumberBox inputId="unitcost" name="unitcost" v-model="model.unitcost"></NumberBox>
-        </div>
-        <div style="margin-bottom:20px">
-          <Label for="attr">Attribute:</Label>
-          <TextBox inputId="attr" name="attr" v-model="model.attr"></TextBox>
-        </div>
-        <div style="margin-bottom:20px">
-          <Label for="status">Status:</Label>
-          <CheckBox inputId="status" name="status" v-model="model.status"></CheckBox>
-        </div>-->
       </Form>
       </div>
       <div class="buttons f-noshrink">
@@ -58,15 +41,17 @@
         <LinkButton @click="$refs.dlg.close()">Cancel</LinkButton>
       </div>
     </Dialog>
+            {{activeProject}}
     </div>
 </template>
  
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapState } from 'vuex'
   export default {
     data() {
       return {
         data: [],
+      
         title: '',
         model: {
           kennung: null,
@@ -81,7 +66,7 @@
             }
       },
     methods: {
-      ...mapActions(['fetchProjects']),
+      ...mapActions(['fetchAllLVs','fetchLVsByProject']),
       addRow(){
         this.model = {
           itemid: null,
@@ -134,12 +119,45 @@
       },
       hasError(name) {
         return this.getError(name) != null;
+      },
+      subscribe(){
+   // console.log("test");
       }
     },
-    computed: mapGetters(["allProjects"]),
-   /* created() {
-        this.fetchProjects();
-    }*/
+    computed: {
+      ...mapGetters(['allLVs','activeProject','activeProjectid']),
+      ...mapState(['activeProject']),
+    },
+    created() {
+      // this.fetchAllLVs();
+      this.fetchLVsByProject({
+        //project_id: this.activeProject.id
+          project_id:"9a4208ba-27da-405c-b484-f386ba48f00b"
+      });
+      this.subscribe(),
+      this.unsubscribe = this.$store.subscribe((mutation) => {
+        if (mutation.type === 'setActiveProjectId') {
+          console.log(`Here: ${this.activeProjectid}`);
+          
+          /* Do whatever makes sense now
+            if (state.status === 'success') {
+              this.complex = {
+                deep: 'some deep object',
+              };
+            }
+          */
+
+            this.fetchLVsByProject({
+              project_id: this.activeProjectid
+              //  project_id:"9a4208ba-27da-405c-b484-f386ba48f00b"
+            });
+        }
+      });
+    },
+    beforeDestroy() {
+      this.unsubscribe();
+    },
+   
   }
 </script>
 <style>

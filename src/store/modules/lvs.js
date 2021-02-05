@@ -1,19 +1,39 @@
-//import axios from 'axios'
+import axios from '@/axios.config.js'
 
 const state = {
     lvs: [
-        { id: 1, name: "Project 1", kennung:"aaa" },
-        { id: 2, name: "Project 2", kennung:"bbb"  },
-        { id: 3, name: "Project 3", kennung:"ccc"  }
+        { id: 1, name: "Baumeister", kennung:"BM" },
+        { id: 2, name: "Trockenbau", kennung:"TB"  },
+        { id: 3, name: "Fliesenleger", kennung:"FZ"  }
     ],
     activeLV: []
 }
 
-const getters = {}
+const getters = {
+    allLVs: state => state.lvs
+}
 
-const actions = {}
+const actions = {
+    async fetchAllLVs({commit}) {
+        const response = await axios.get('/lvs')
+        console.log("fetching All LVs")
+        console.log(response.data)
+        commit('setLVs',response.data)
+    },
 
-const mutations  = {}
+    async fetchLVsByProject({commit},Project) {
+        //Project = '"project_id":"9a4208ba-27da-405c-b484-f386ba48f00b"'
+        const response = await axios.post('/lvs',Project)
+        console.log("fetching LVs by Project", Project)
+        //console.log(Project)
+        //console.log(response.data)
+        commit('setLVs',response.data)
+    },
+}
+
+const mutations  = {
+    setLVs: (state, lvs) => (state.lvs = lvs),
+}
 
 
 export default {
