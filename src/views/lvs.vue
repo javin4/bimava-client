@@ -2,7 +2,7 @@
    
    <Layout style="width: 100%; height: 800px">
       <LayoutPanel region="east" title="Eigenschaften" :collapsible="true" :collapsed="true" :expander="true" style="width:350px;">
-        <add-item/>
+        East
       </LayoutPanel>
 
       <LayoutPanel region="center" style="">
@@ -14,23 +14,15 @@
 
 <script>
 import LayoutDefault from '@/components/layout/Default.vue';
-import AddItem from '@/components/widgets/AddItem.vue';
 import LvsGrid from '@/components/widgets/lvs/LvsGrid.vue';
-import { todoItemsQuery } from "@/graphql/queries.js"
 
 export default {
   components: { 
     LvsGrid,
-    AddItem,
   },
-  name: 'ProjectView',
+  name: 'lvs',
   created() {
     this.$emit('update:layout', LayoutDefault);
-  },
-    apollo: {
-    todoItems: {
-      query: todoItemsQuery
-    }
   },
 
 };

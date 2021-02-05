@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-on:keyup.esc="$refs.dlg.close()">
         <h2>Projekt Übersicht</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
         <DataGrid :data="allProjects" style="height:250px">
@@ -40,6 +40,7 @@
       <div class="buttons f-noshrink">
         <LinkButton @click="saveRow()">Save</LinkButton>
         <LinkButton @click="$refs.dlg.close()">Cancel</LinkButton>
+        <input v-on:keyup.esc="$refs.dlg.close()">
       </div>
     </Dialog>
     </div>
@@ -65,16 +66,12 @@
             }
       },
     methods: {
-      ...mapActions(['fetchProjects','deleteProject']),
+      ...mapActions(['fetchProjects','deleteProject','updateProject','addProject']),
       addRow(){
-        this.model = {
-          itemid: null,
+        /*this.model = {
+          id: null,
           name: null,
-          listprice: null,
-          unitcost: null,
-          attr: null,
-          status: true
-        };
+        };*/
         this.title = 'Add';
         this.$refs.dlg.open();
       },
@@ -88,14 +85,18 @@
         this.$refs.form.validate(errors => {
           if (!errors){
             const newRow = Object.assign({}, this.model);
-            if (this.editingRow){
+            //edit an existing ...
+            if (this.editingRow){ 
               const index = this.data.indexOf(this.editingRow);
               this.data.splice(index,1,newRow);
               this.editingRow = null;
+              this.updateProject(this.model);
             } else {
               this.data.unshift(newRow)
             }
+            //add one new ...
             this.$refs.dlg.close();
+             this.addProject(this.model);
           }
         })
       },

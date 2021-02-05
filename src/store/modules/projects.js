@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/axios.config.js'
 
 const state = {
     projects: [
@@ -18,27 +18,20 @@ const getters = {
 
 const actions = {
     async fetchProjects({commit}) {
-        const response = await axios.get('http://bimavarest.loc/api/projects')
+        const response = await axios.get('/projects')
         console.log("fetching projects")
         console.log(response.data)
         commit('setProjects',response.data)
     },
 
     async fetchActiveProject({commit},projectId) {
-        const response = await axios.get(`http://bimavarest.loc/api/project/${projectId}`)
+        const response = await axios.get(`/project/${projectId}`)
         commit('setActiveProject',response.data)
         console.log ('User XXX works on project:' ,projectId)
     },
 
     async addProject({commit},project ){
-        let axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                "Access-Control-Allow-Origin": "*",
-            }
-          };
-
-        const response = await axios.post('http://bimavarest.loc/api/project',project,axiosConfig)
+        const response = await axios.post('/project', project)
         .catch(error => { 
             console.log("ERRRR:: ",error.response.data);
         });
@@ -47,10 +40,16 @@ const actions = {
     },
 
     async deleteProject({ commit }, projectId) {
-        await axios.delete(`http://bimavarest.loc/api/project/${projectId}`)
+        await axios.delete(`/project/${projectId}`)
         commit('removeProject', projectId);
         console.log ('User XXX has deleted project:' ,projectId)
-      },
+    },
+    
+    async updateProject({ commit }, updProject) {
+        const response = await axios.put(`/project/${updProject.id}`,updProject);
+        commit('editProject', response.data);
+        console.log ('User XXX has deleted project:' ,updProject.id)
+    }
 
 }
 
@@ -59,6 +58,12 @@ const mutations  = {
     setActiveProject:(state, project) => (state.activeProject = project),
     newProject: (state, project) => state.projects.unshift(project),
     removeProject: (state, id) => (state.projects = state.projects.filter(project => project.id !== id)),
+    editProject: (state, updProject) => {
+        const index = state.projects.findIndex(project => project.id === updProject.id);
+        if (index !== -1) {
+          state.projects.splice(index, 1, updProject);
+        }
+      }
 }
 
 export default {
