@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Dialog Editing</h2>
+        <h2>Projekt Übersicht</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
         <DataGrid :data="allProjects" style="height:250px">
             <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
@@ -65,7 +65,7 @@
             }
       },
     methods: {
-      ...mapActions(['fetchProjects']),
+      ...mapActions(['fetchProjects','deleteProject']),
       addRow(){
         this.model = {
           itemid: null,
@@ -102,11 +102,10 @@
       deleteRow(row){
         this.$messager.confirm({
           title: 'Confirm',
-          msg: 'Are you sure you want to delete the row?',
+          msg: `Möchten Sie das Projekt ${row.kennung} - ${row.name} endgültig löschen?`,
           result: (r) => {
             if (r){
-              const index = this.data.indexOf(row);
-              this.data.splice(index,1);
+              this.deleteProject(row.id)
             }
           }
         })

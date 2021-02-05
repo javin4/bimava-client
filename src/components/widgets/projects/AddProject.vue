@@ -35,7 +35,6 @@ export default {
       ...mapActions(['addProject']),
       onSubmit(e) {
           e.preventDefault();
-          console.log("test");
           this.addProject({
               name:this.name, 
               kennung:this.kennung

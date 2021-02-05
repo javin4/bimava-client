@@ -24,11 +24,10 @@ const actions = {
         commit('setProjects',response.data)
     },
 
-    async fetchOneProject({commit},projectId) {
+    async fetchActiveProject({commit},projectId) {
         const response = await axios.get(`http://bimavarest.loc/api/project/${projectId}`)
-        console.log("fetching one project")
-        console.log(response.data)
         commit('setActiveProject',response.data)
+        console.log ('User XXX works on project:' ,projectId)
     },
 
     async addProject({commit},project ){
@@ -44,14 +43,22 @@ const actions = {
             console.log("ERRRR:: ",error.response.data);
         });
         commit('newProject',response.data)
-    }
+        console.log ('User XXX has created project:' ,response.data.id)
+    },
+
+    async deleteProject({ commit }, projectId) {
+        await axios.delete(`http://bimavarest.loc/api/project/${projectId}`)
+        commit('removeProject', projectId);
+        console.log ('User XXX has deleted project:' ,projectId)
+      },
 
 }
 
 const mutations  = {
     setProjects: (state, projects) => (state.projects = projects),
+    setActiveProject:(state, project) => (state.activeProject = project),
     newProject: (state, project) => state.projects.unshift(project),
-    setActiveProject:(state, project) => (state.activeProject = project)
+    removeProject: (state, id) => (state.projects = state.projects.filter(project => project.id !== id)),
 }
 
 export default {
