@@ -4,7 +4,7 @@
         <add-project/>
       </LayoutPanel>
 
-      <LayoutPanel region="center" style="">
+      <LayoutPanel title="Projekt Übersicht" region="center" style="">
         <projects-grid />
       </LayoutPanel>
 
@@ -14,7 +14,7 @@
 <script>
 import LayoutDefault from '@/components/layout/Default.vue';
 import AddProject from '@/components/widgets/projects/AddProject.vue';
-import ProjectsGrid from '@/components/widgets/projects/ProjectsGrid.vue';
+import ProjectsGrid from '../components/widgets/projects/ProjectsGrid.vue';
 //import LayoutDefaultDynamic from '../components/Layout/LayoutDefaultDynamic.js';
 
 export default {

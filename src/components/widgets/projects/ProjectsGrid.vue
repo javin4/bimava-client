@@ -1,8 +1,7 @@
 <template>
   <div v-on:keyup.esc="$refs.dlg.close()">
-    <h2>Projekt Übersicht</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-    <DataGrid :data="allProjects" style="height:250px">
+    <DataGrid :data="allProjects" :columnResizing="true" style="height:250px">
       <GridColumn field="kennung" title="Proj. Kennung" align="left" :sortable="true" width="10%"></GridColumn>
       <GridColumn field="name" title="Projekt Bezeichnung" :sortable="true"></GridColumn>
       <GridColumn field="Gesamtkosten" title="GEK Gesamtkosten" align="right" :sortable="true"></GridColumn>
@@ -67,10 +66,10 @@
     methods: {
       ...mapActions(['fetchProjects','deleteProject','updateProject','addProject']),
       addRow(){
-        /*this.model = {
-          id: null,
+        this.model = {
+          kennung: null,
           name: null,
-        };*/
+        };
         this.title = 'Add';
         this.$refs.dlg.open();
       },
@@ -90,12 +89,11 @@
               this.data.splice(index,1,newRow);
               this.editingRow = null;
               this.updateProject(this.model);
-            } else {
+            } else { //add one new ...
               this.data.unshift(newRow)
+              this.addProject(this.model);
             }
-            //add one new ...
             this.$refs.dlg.close();
-             this.addProject(this.model);
           }
         })
       },

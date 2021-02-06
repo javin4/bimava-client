@@ -6,20 +6,14 @@ const state = {
         { id: 2, name: "Project 2", kennung:"bbb"  },
         { id: 3, name: "Project 3", kennung:"ccc"  }
     ],
-    activeProject: [
-      //  { id: 1, name: "Project 1", kennung:"aaa" },
-    ],
+    //activeProject: [],
     activeProjectid: "1"
 }
 
 const getters = {
     allProjects: state => state.projects,
-    activeProject: state => state.activeProject,
+    //activeProject: state => state.activeProject,
     activeProjectid: state => state.activeProjectid,
-        active(state) {
-            return state.activeProject;
-        }
-    
 }
 
 const actions = {
@@ -30,7 +24,7 @@ const actions = {
         commit('setProjects',response.data)
     },
 
-    async fetchActiveProject({commit},projectId) {
+    async fetchOneProject({commit},projectId) {
         const response = await axios.get(`/project/${projectId}`)
         commit('setActiveProject',response.data)
         console.log ('User XXX works on project:' ,projectId)
@@ -65,7 +59,7 @@ const actions = {
 
 const mutations  = {
     setProjects: (state, projects) => (state.projects = projects),
-    setActiveProject:(state, project) => (state.activeProject = project),
+    //setActiveProject:(state, project) => (state.activeProject = project),
     setActiveProjectId:(state,projectId) => (state.activeProjectid = projectId),
     newProject: (state, project) => state.projects.unshift(project),
     removeProject: (state, id) => (state.projects = state.projects.filter(project => project.id !== id)),

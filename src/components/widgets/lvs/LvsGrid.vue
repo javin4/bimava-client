@@ -6,7 +6,7 @@
     <span v-else>
 
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-        <DataGrid v-if="allLVs" :data="allLVs" style="height:250px">
+        <DataGrid  :data="allLVs" :columnResizing="true" style="height:250px">
             <GridColumn field="kennung" title="LV Kennung" align="left" :sortable="true" width="10%"></GridColumn>
             <GridColumn field="name" title="LV Bezeichnung" :sortable="true"></GridColumn>
             <GridColumn field="Gesamtkosten" title="GEK Gesamtkosten" align="right" :sortable="true"></GridColumn>
@@ -22,10 +22,10 @@
                 </template>
             </GridColumn>
         </DataGrid>
-        <div v-else> Keine LVs</div>
+        <div v-show="!allLVs"> Keine LVs</div>
     </span>
     
-    <Dialog ref="dlg" bodyCls="f-column" :title="title" :modal="true" closed :dialogStyle="{height:'300px'}">
+    <Dialog ref="dlg" bodyCls="f-column" :title="title" :modal="true" closed :dialogStyle="{height:'300px', width:'500px'}">
       <div class="f-full" style="overflow:auto">
       <Form ref="form" :model="model" :rules="rules" @validate="errors=$event" style="padding:20px 50px">
         <div style="margin-bottom:20px">
@@ -54,11 +54,11 @@
     data() {
       return {
         data: [],
-      
         title: '',
         model: {
           kennung: null,
           name: null,
+          project_id: null,
         },
         rules: {
           kennung: 'required',
@@ -69,15 +69,12 @@
             }
       },
     methods: {
-      ...mapActions(['fetchAllLVs','fetchLVsByProject']),
+      ...mapActions(['fetchAllLVs','fetchLVsByProject','deleteLV','addLV']),
       addRow(){
         this.model = {
-          itemid: null,
+          kennung: null,
           name: null,
-          listprice: null,
-          unitcost: null,
-          attr: null,
-          status: true
+          project_id: this.activeProjectid,
         };
         this.title = 'Add';
         this.$refs.dlg.open();
@@ -96,10 +93,18 @@
               const index = this.data.indexOf(this.editingRow);
               this.data.splice(index,1,newRow);
               this.editingRow = null;
+              this.updateProject(this.model);
             } else {
               this.data.unshift(newRow)
+              this.addLV(this.model);
             }
+            //add one new ...
             this.$refs.dlg.close();
+            /*console.log(this.model)
+            console.log('id:',this.model.id)
+            console.log('kennung',this.model.kennung)
+            console.log('name',this.model.name)*/
+
           }
         })
       },
@@ -109,8 +114,7 @@
           msg: 'Are you sure you want to delete the row?',
           result: (r) => {
             if (r){
-              const index = this.data.indexOf(row);
-              this.data.splice(index,1);
+              this.deleteLV(row.id)
             }
           }
         })
@@ -125,7 +129,7 @@
       },
     },
     computed: {
-      ...mapGetters(['allLVs','activeProject','activeProjectid'])
+      ...mapGetters(['allLVs','activeProjectid'])
     },
     created() {
       this.fetchLVsByProject({
@@ -145,19 +149,30 @@
    
   }
 </script>
-<style>
-.buttons{
-  text-align: right;
-  padding: 10px;
-}
-.buttons .l-btn{
-  width: 80px;
-  margin-left: 5px;
-}
-.error {
-  color: red;
-  font-size: 12px;
-  margin: 4px 0;
-  margin-left: 80px;
-}
+<style scoped>
+  .f-field {
+    width:16em;
+  }
+
+  .error {
+    text-align: right;
+  }
+
+  .textbox-label {
+    width: 150px;
+  }
+  .buttons{
+    text-align: right;
+    padding: 10px;
+  }
+  .buttons .l-btn{
+    width: 80px;
+    margin-left: 5px;
+  }
+  .error {
+    color: red;
+    font-size: 12px;
+    margin: 4px 0;
+    margin-left: 80px;
+  }
 </style>

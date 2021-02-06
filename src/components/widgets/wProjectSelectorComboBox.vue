@@ -25,7 +25,7 @@
       };
     },
     methods: {
-      ...mapActions(['fetchProjects','fetchActiveProject','changeActiveProjectId']),
+      ...mapActions(['fetchProjects','changeActiveProjectId']),
       onChange:function(event){
         //console.log(event.target.value);
         //this.fetchActiveProject(event.target.value);
