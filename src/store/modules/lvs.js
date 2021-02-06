@@ -27,7 +27,12 @@ const actions = {
     async fetchLVsByProject({commit},Project) {
         const response = await axios.post('/lvs',Project)
         console.log("fetching LVs by Project", Project)
+
+        if (!response.data){
+            response.data = []
+        }
         commit('setLVs',response.data)
+
     },
 
     async addLV({commit},lv ){
