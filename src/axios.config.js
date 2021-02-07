@@ -6,7 +6,7 @@ axios.defaults.baseURL = 'http://bimavarest.loc/api/';
 //axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-axios.defaults.headers.['Access-Control-Allow-Origin'] = '*';
+//axios.defaults.headers.['Access-Control-Allow-Origin'] = '*';
 
 
 export default axios
