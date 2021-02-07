@@ -182,12 +182,12 @@ export default {
         {
           id: 1,
           text: "Projekte",
-          Path:"/project"
+          Path:"/projects"
         },
         {
           id: 2,
-          text: "User",
-          Path:"/"
+          text: "Users",
+          Path:"/users"
         },
           {
           id: 3,

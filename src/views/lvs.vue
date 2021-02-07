@@ -5,7 +5,7 @@
         East
       </LayoutPanel>
 
-      <LayoutPanel region="center" style="">
+      <LayoutPanel title="Ausschreibungen" region="center" style="">
         <lvs-grid />
       </LayoutPanel>
 

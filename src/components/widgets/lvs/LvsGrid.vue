@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>LVs</h2>
     <span v-if="activeProjectid==='1'">
     Bitte wählen sie zu erst ein Projekt aus</span>
     <span v-else>
