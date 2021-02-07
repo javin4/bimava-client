@@ -68,7 +68,7 @@
             }
       },
     methods: {
-      ...mapActions(['fetchAllLVs','fetchLVsByProject','deleteLV','addLV']),
+      ...mapActions(['fetchAllLVs','fetchLVsByProject','deleteLV','addLV','updateLV']),
       addRow(){
         this.model = {
           kennung: null,
@@ -92,7 +92,7 @@
               const index = this.data.indexOf(this.editingRow);
               this.data.splice(index,1,newRow);
               this.editingRow = null;
-              this.updateProject(this.model);
+              this.updateLV(this.model);
             } else {
               this.data.unshift(newRow)
               this.addLV(this.model);

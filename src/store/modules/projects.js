@@ -52,7 +52,7 @@ const actions = {
     async updateProject({ commit }, updProject) {
         const response = await axios.put(`/project/${updProject.id}`,updProject);
         commit('editProject', response.data);
-        console.log ('User XXX has deleted project:' ,updProject.id)
+        console.log ('User XXX has updated project:' , updProject.id)
     }
 
 }

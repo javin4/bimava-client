@@ -52,13 +52,24 @@ const actions = {
         commit('removeLV', lvId);
         console.log ('User XXX has deleted LV:' ,lvId)
     },
+
+    async updateLV({ commit }, updLV) {
+        const response = await axios.put(`/lv/${updLV.id}`,updLV);
+        commit('editLV', response.data);
+        console.log ('User XXX has updated LV:' , updLV.id)
+    }
 }
 
 const mutations  = {
     setLVs: (state, lvs) => (state.lvs = lvs),
     newLV: (state, lv) => state.lvs.unshift(lv),
     removeLV: (state, id) => (state.lvs = state.lvs.filter(lv => lv.id !== id)),
-   
+    editLV: (state, updLV) => {
+        const index = state.lvs.findIndex(lv => lv.id === updLV.id);
+        if (index !== -1) {
+          state.lvs.splice(index, 1, updLV);
+        }
+      }
 }
 
 
