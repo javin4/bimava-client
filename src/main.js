@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'vx-easyui/dist/themes/flow/easyui.css';
-import 'vx-easyui/dist/themes/flow/icon.css';
+//import 'vx-easyui/dist/themes/flow/easyui.css';
+//import 'vx-easyui/dist/themes/flow/icon.css';
+import '@/assets/vx-easyui/flow/easyui.css';
+import '@/assets/vx-easyui/flow/icon.css';
 import 'vx-easyui/dist/themes/vue.css';
 import EasyUI from 'vx-easyui';
 
