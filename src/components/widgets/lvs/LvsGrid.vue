@@ -99,11 +99,6 @@
             }
             //add one new ...
             this.$refs.dlg.close();
-            /*console.log(this.model)
-            console.log('id:',this.model.id)
-            console.log('kennung',this.model.kennung)
-            console.log('name',this.model.name)*/
-
           }
         })
       },
@@ -131,14 +126,10 @@
       ...mapGetters(['allLVs','activeProjectid'])
     },
     created() {
-      this.fetchLVsByProject({
-            project_id: this.activeProjectid
-      });
+      this.fetchLVsByProject(this.activeProjectid);
       this.unsubscribe = this.$store.subscribe((mutation) => {
         if (mutation.type === 'setActiveProjectId') {
-          this.fetchLVsByProject({
-            project_id: this.activeProjectid
-          });
+          this.fetchLVsByProject(this.activeProjectid);
         }
       });
     },

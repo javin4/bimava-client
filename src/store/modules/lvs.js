@@ -24,9 +24,9 @@ const actions = {
         commit('setLVs',response.data)
     },
 
-    async fetchLVsByProject({commit},Project) {
-        const response = await axios.post('/lvs',Project)
-        console.log("fetching LVs by Project", Project)
+    async fetchLVsByProject({commit},project_id) {
+        const response = await axios.get(`/lvs/${project_id}`)
+        console.log("fetching LVs by Project", project_id)
 
         if (!response.data){
             response.data = []

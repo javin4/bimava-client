@@ -32,6 +32,11 @@ const routes = [
     path: '/lvs',
     name: 'lvs',
     component: () => import(/* webpackChunkName: "about" */ '../views/lvs.vue')
+  },
+  {
+    path: '/phases',
+    name: 'phases',
+    component: () => import(/* webpackChunkName: "about" */ '../views/phases.vue')
   }
 ]
 

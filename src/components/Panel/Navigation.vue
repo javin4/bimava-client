@@ -11,7 +11,9 @@
                 </template>
                 <Tree :data="ProjectTreeData">
                     <template slot-scope="scope">
-                      <router-link v-if="scope.node.Path" :to="scope.node.Path">{{scope.node.text}}</router-link> 
+                      <router-link  v-if="scope.node.Path" :to="scope.node.Path">
+                         <span >{{scope.node.text}}</span>
+                      </router-link> 
                       <span v-else>{{scope.node.text}}</span>
                     </template>
                 </Tree>
@@ -52,7 +54,6 @@
  
 <script>
 import WProjectSelectorComboBox from '../widgets/wProjectSelectorComboBox.vue';
-
 export default {
   data() {
     return {
@@ -81,20 +82,24 @@ export default {
             },
             {
               id: 12,
-              text: "Program Files",
-              state: "closed",
+              text: "Planungsphasen",
+              state: "open",
+              Path:"Phases",
               children: [
                 {
                   id: 121,
-                  text: "Intel"
+                  text: "1 Grundlagenanalyse",
+                  Path:"Phases",
                 },
                 {
                   id: 122,
-                  text: "Java"
+                  text: "2 Vorentwurf",
+                  Path:"Phases",
                 },
                 {
                   id: 123,
-                  text: "Microsoft Office"
+                  text: "Microsoft Office",
+                  Path:"Phases",
                 },
                 {
                   id: 124,
@@ -198,6 +203,8 @@ export default {
   },
   components: {
         WProjectSelectorComboBox,
+  },
+  methods:{  
   }
 };
 </script>
