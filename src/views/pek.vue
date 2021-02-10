@@ -4,7 +4,7 @@
         <add-project/>
       </LayoutPanel>
 
-      <LayoutPanel title="Projekt Übersicht" region="center" style="">
+      <LayoutPanel title="PEK Projekt Element Katalog" region="center" style="">
         <pek-grid />
       </LayoutPanel>
 

@@ -17,6 +17,18 @@ Array.prototype.move = function(from, to) {
 };
 
 
+Vue.filter('toEUR', function (value) {
+  /*if (typeof value !== "number") {
+      return value;
+  }*/
+  var formatter = new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+  });
+  return formatter.format(value);
+});
+
 Vue.config.productionTip = false
 
 new Vue({

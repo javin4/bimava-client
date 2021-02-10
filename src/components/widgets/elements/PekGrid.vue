@@ -9,13 +9,13 @@
       <GridColumn :expander="true" width="30"></GridColumn>
       <GridColumn field="kennung" title="Kennung" width="100"></GridColumn>
       <GridColumn field="name" title="Bezeichnung" width="400"></GridColumn>
-      <GridColumn field="listprice" title="List Price" align="right"></GridColumn>
-      <GridColumn field="unitcost" title="Unit Cost" align="right"></GridColumn>
+      <GridColumn field="ehp_override" title="EHP" align="right"></GridColumn>
+      <GridColumn field="ehp_result" title="Unit Cost" align="right"></GridColumn>
       <GridColumn field="attr" title="Attribute" width="500"></GridColumn>
       <GridColumn field="id" title="id" align="right" width="350"></GridColumn>
         <template slot="detail" slot-scope="scope">
           <div style="padding:2px 2px 2px 130px">
-            <DataGrid :data="scope.row.p_components">
+            <DataGrid :data="scope.row.p_components" :footerData="footerData" :showFooter="true">
               <GridColumn field="move" title="move" width="60">
                 <template slot="body" slot-scope="scope3">
                 <div class="item">  
@@ -30,7 +30,18 @@
               </GridColumn>
               <GridColumn field="kennung" title="Order ID"></GridColumn>
               <GridColumn field="name" title="Bezeichnung"></GridColumn>
-              <GridColumn field="unitprice" title="Unit Price"></GridColumn>
+              <GridColumn field="ehp_result" title="ehp_result">
+                <template slot="body" slot-scope="scope">
+                  <div class="item EUR">
+                    <div>{{ scope.row.ehp_result | toEUR}}</div>
+                  </div>
+                </template>
+                <template slot="footer" slot-scope="scope">
+                  <div class="item EUR">
+                    <div>{{ scope.row.ehp_result | toEUR}}</div>
+                  </div>
+                </template>
+              </GridColumn>
             </DataGrid>
           </div>
         </template>
@@ -43,25 +54,38 @@ import { mapGetters , mapActions} from 'vuex'
 export default {
   name: 'pek',
   data () {
-    return {}
+    return {
+      footerData:[{
+        'ehp_result':100
+      }]
+    }
   },
   components: { 
   },
   methods: {
      ...mapActions(['fetchPek']),
     onRowExpand(row){
-     console.log("Expand Row", row.id)
+      var summe = 0;
+      for (var i = 0; i < row.p_components.length; ++i) {
+          summe += parseFloat(row.p_components[i].ehp_result);
+      }
+      this.updateFooter(summe)
     },
     moveComponent(items,from, to){
       items.splice(to, 0, items.splice(from, 1)[0]);
-    }
+    },
+    updateFooter(ehp_result){
+      this.footerData = [{
+        'ehp_result':ehp_result
+      }]
+    },
   },
   computed: {
       ...mapGetters(["allPek"]),
   },
   created() {
     this.fetchPek();
-  }
+  },
 };
 </script>
 
@@ -73,5 +97,8 @@ export default {
   .MoveUpDown {
     background-color:white;
     border: none;
+  }
+  .EUR {
+    text-align: right;
   }
 </style>
