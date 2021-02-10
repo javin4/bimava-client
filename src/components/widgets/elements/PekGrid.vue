@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DataGrid :data="pek" @rowExpand="onRowExpand($event)" :filterable="true" style="height:500px">
+    <DataGrid :data="allPek" @rowExpand="onRowExpand($event)" :filterable="true" style="height:500px">
       <GridColumn align="center" cellCss="datagrid-td-rownumber" width="30">
         <template slot="body" slot-scope="scope">
             {{scope.rowIndex + 1}}
@@ -39,34 +39,16 @@
 </template>
 
 <script>
-//import { mapGetters , mapActions} from 'vuex'
+import { mapGetters , mapActions} from 'vuex'
 export default {
   name: 'pek',
   data () {
-    return {
-      pek: [
-        {
-          "kennung":" FB01",
-          "name":" Wohn- Betriebs-Trenndecke Bestand - Linoleum",
-          "id":"49584723-5550-4bbd-ac0b-cb07ca36652a",
-          "p_components":[
-              {"name":"Linoleum","kennung":" E1","p_component_id":"de57b730-5d82-4603-9051-6d0b901735fb"},
-              {"name":"Calciumsulfatestrich mit Faserbewehrung (E300 \u2264 3kN m\u00b2)","kennung":" E2","p_component_id":"900e5cc7-629e-4277-ae28-2c94b6c54171"},
-              {"name":"PE-Folie","kennung":" E3","p_component_id":"128285c2-bbd9-4202-8072-3f6fd504d77b"},
-              {"name":"Trittschall-D\u00e4mmpl. 20 - ISOVER TDPT","kennung":" E4","p_component_id":"534fbcf6-b9c8-4cd8-b593-f553eb775f70"},
-              {"name":"PE-Folie (sd>=120m)","kennung":" E5","p_component_id":"96509a21-9776-4985-864e-e4e02ebc9cad"}
-          ]
-        },
-        {"kennung":" FB01-A1","name":" Wohn- Betriebs-Trenndecke Bestand - Linoleum","id":"81ce88d9-e93c-4821-8b67-f0b5a82a1df7","p_components":[]},
-        {"kennung":" FB01-A2","name":" Wohn- Betriebs-Trenndecke Bestand - Linoleum","id":"c02e0869-604f-4632-83ad-e07446001385","p_components":[]},
-        {"kennung":" FB01-B1","name":" Wohn- Betriebs-Trenndecke Bestand - Linoleum","id":"86db5f45-26c7-42e2-b53b-69fc0aad7a0e","p_components":[]},
-        {"kennung":" FB01-B2","name":" Wohn- Betriebs-Trenndecke Bestand - Linoleum","id":"130853ea-2eea-4059-967b-33154faa3001","p_components":[]}
-        ]
-    }
+    return {}
   },
   components: { 
   },
   methods: {
+     ...mapActions(['fetchPek']),
     onRowExpand(row){
      console.log("Expand Row", row.id)
     },
@@ -75,20 +57,21 @@ export default {
     }
   },
   computed: {
+      ...mapGetters(["allPek"]),
   },
   created() {
+    this.fetchPek();
   }
 };
 </script>
 
 <style scoped>
-:disabled {
-  background-color:white;
-}
+  :disabled {
+    background-color:white;
+  }
 
-.MoveUpDown {
-  background-color:white;
-  border: none;
-}
-
+  .MoveUpDown {
+    background-color:white;
+    border: none;
+  }
 </style>
