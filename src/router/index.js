@@ -37,6 +37,11 @@ const routes = [
     path: '/phases',
     name: 'phases',
     component: () => import(/* webpackChunkName: "about" */ '../views/phases.vue')
+  },
+  {
+    path: '/pek',
+    name: 'pek',
+    component: () => import(/* webpackChunkName: "about" */ '../views/pek.vue')
   }
 ]
 
