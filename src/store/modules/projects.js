@@ -42,19 +42,18 @@ const actions = {
         commit('newProject',response.data)
         console.log ('User XXX has created project:' ,response.data.id)
     },
-
-    async deleteProject({ commit }, projectId) {
-        await axios.delete(`/project/${projectId}`)
-        commit('removeProject', projectId);
-        console.log ('User XXX has deleted project:' ,projectId)
-    },
     
     async updateProject({ commit }, updProject) {
         const response = await axios.put(`/project/${updProject.id}`,updProject);
         commit('editProject', response.data);
         console.log ('User XXX has updated project:' , updProject.id)
-    }
+    },
 
+    async deleteProject({ commit }, projectId) {
+        await axios.delete(`/project/${projectId}`)
+        commit('removeProject', projectId);
+        console.log ('User XXX has deleted project:' ,projectId)
+    }
 }
 
 const mutations  = {

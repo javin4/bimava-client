@@ -29,6 +29,7 @@ Vue.filter('toEUR', function (value) {
   return formatter.format(value);
 });
 
+
 Vue.config.productionTip = false
 
 new Vue({

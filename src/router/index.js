@@ -42,6 +42,11 @@ const routes = [
     path: '/pek',
     name: 'pek',
     component: () => import(/* webpackChunkName: "about" */ '../views/pek.vue')
+  },
+  {
+    path: '/pcomponent',
+    name: 'pcomponent',
+    component: () => import(/* webpackChunkName: "about" */ '../views/pcomponent.vue')
   }
 ]
 
