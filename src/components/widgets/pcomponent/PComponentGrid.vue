@@ -1,7 +1,8 @@
 <template>
   <div v-on:keyup.esc="$refs.dlg.close()">
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-    <DataGrid :data="allPComponents" :columnResizing="true" style="height:250px"                
+    <DataGrid :data="allPComponents" :columnResizing="true" style="height:500px"
+                :filterable="true"                 
                 :selectionMode="selectionMode"
                 @selectionChange="MySelection($event)">
       <GridColumn field="kennung" title="Kennung" align="left" :sortable="true" width="10%"></GridColumn>
@@ -9,7 +10,7 @@
       <GridColumn field="ehp_result" title="ehp_result" align="right" :sortable="true">
         <template slot="body" slot-scope="scope"> <div class="item EUR"> <div>{{ scope.row.ehp_result | toEUR}}</div></div></template>
       </GridColumn>
-      <GridColumn field="act" title="Actions" width="50px" align="center">
+      <GridColumn field="act" title="Actions" width="80px" align="center">
         <template slot="body" slot-scope="scope">
           <ButtonGroup style="height:24px">
               <LinkButton @click="deleteRow(scope.row)"><i class="fas fa-trash"></i></LinkButton>
@@ -58,11 +59,11 @@
         errors: {},
         editingRow: null,
         selectionMode: "single",
-        selection: null
+        selection: null,
       }
     },
     methods: {
-      ...mapActions(['fetchPComponents','deletePComponent','fetchPComponent']),
+      ...mapActions(['fetchPComponents','deletePComponent','fetchPComponent','addPComponent']),
       addRow(){
         this.model = {
           kennung: null,
@@ -89,7 +90,7 @@
               this.updateProject(this.model);
             } else { //add one new ...
               this.data.unshift(newRow)
-              this.addProject(this.model);
+              this.addPComponent(this.model);
             }
             this.$refs.dlg.close();
           }

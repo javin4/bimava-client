@@ -6,7 +6,7 @@
       <p-component-properties/>
       </LayoutPanel>
 
-      <LayoutPanel title="Komponenten Übersicht" region="center" style="">
+      <LayoutPanel title="Komponenten Katalog" region="center" style="">
         <p-component-grid />
       </LayoutPanel>
 

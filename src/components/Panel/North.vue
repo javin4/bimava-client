@@ -5,7 +5,8 @@
             <router-link to="/lvs">lvs</router-link> |
             <router-link to="/projects">projects</router-link> |
             <router-link to="/pek">pek</router-link> |
-            <router-link to="/pcomponent">pcomponent</router-link>
+            <router-link to="/pcomponent">pcomponent</router-link> |
+             <router-link to="/bgl">bgl</router-link>
           </div>
 </template>
 

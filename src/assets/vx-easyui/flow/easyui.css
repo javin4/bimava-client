@@ -15,7 +15,14 @@
     src: url("../webfonts/fa-solid-900.eot");
     src: url("../webfonts/fa-solid-900.eot") format("embedded-opentype"), url("../webfonts/fa-solid-900.woff2") format("woff2"), url("../webfonts/fa-solid-900.woff") format("woff"), url("../webfonts/fa-solid-900.ttf") format("truetype"), url("../webfonts/fa-solid-900.svg#fontawesome") format("svg"); }
    
-
+@font-face {
+  font-family: 'Font Awesome 5 Regular';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../webfonts/fa-regular-400.eot");
+  src: url("../webfonts/fa-regular-400.eot") format("embedded-opentype"), url("../webfonts/fa-regular-400.woff2") format("woff2"), url("../webfonts/fa-solid-900.woff") format("woff"), url("../webfonts/fa-solid-900.ttf") format("truetype"), url("../webfonts/fa-solid-900.svg#fontawesome") format("svg"); }
+  
  
  .fa,
  .fas,
@@ -7841,10 +7848,17 @@
     background: url('images/tree_icons.png') no-repeat -240px 0;
   }
 */
+/*
   .tree-file:before  {
     font-family: 'Font Awesome 5 Free';
+    content: "<i class="far fa-file"></i> \f15b";
+  }
+  */
+  .tree-file:before  {
+    font-family: 'Font Awesome 5 Regular';
     content: "\f15b";
   }
+
 
   .tree-loading {
     background: url('images/loading.gif') no-repeat center center;

@@ -5,6 +5,7 @@ import projects from './modules/projects';
 import pphases from './modules/pphases';
 import pek from './modules/pek';
 import pcomponents from './modules/pcomponents';
+import bgls from './modules/gl/bgls';
 
 
 Vue.use(Vuex)
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     projects,
     pphases,
     pek,
-    pcomponents
+    pcomponents,
+    bgls
   }
 })

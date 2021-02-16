@@ -32,6 +32,26 @@ const actions = {
         console.log ('User XXX works on PComponent:' ,id)
     },
 
+    async addPComponent({commit},id ){
+        const response = await axios.post('/PComponent', id)
+        .catch(error => { 
+            console.log("ERRRR:: ",error.response.data);
+        });
+        commit('newPComponent',response.data)
+        console.log ('User XXX has created PComponent:' ,response.data.id)
+    },
+
+    async ChangePComponentBgl({commit},[PComponentID, BglID]){
+
+        const response = await axios.put(`/PComponent/${PComponentID}/Bgl/${BglID}`)
+        .catch(error => { 
+            console.log("ERRRR:: ",error.response.data);
+        });
+        commit('setActivePComponent',response.data)
+        console.log(`User xxx changed Bgl :  ${BglID} in PComponent: ${PComponentID}`)
+    },
+
+
     async updatePComponent({ commit }, upd) {
         const response = await axios.put(`/PComponent/${upd.id}`,upd);
         commit('editPComponent', response.data);
@@ -47,9 +67,10 @@ const actions = {
 
 const mutations  = {
     setPComponents: (state, PComponents) => (state.PComponents = PComponents),
-    removePComponent: (state, id) => (state.PComponents = state.PComponents.filter(PComponent => PComponent.id !== id)),
     setActivePComponent:(state,PComponent) => (state.ActivePComponent = PComponent),
-    editPComponent: (state, upd) => state.PComponents.findIndex(PComponent => PComponent.id === upd.id)
+    newPComponent: (state, PComponent) => state.PComponents.unshift(PComponent),
+    editPComponent: (state, upd) => state.PComponents.findIndex(PComponent => PComponent.id === upd.id),
+    removePComponent: (state, id) => (state.PComponents = state.PComponents.filter(PComponent => PComponent.id !== id)),
 }
 
 export default {

@@ -47,6 +47,11 @@ const routes = [
     path: '/pcomponent',
     name: 'pcomponent',
     component: () => import(/* webpackChunkName: "about" */ '../views/pcomponent.vue')
+  },
+  {
+    path: '/bgl',
+    name: 'bgl',
+    component: () => import(/* webpackChunkName: "about" */ '../views/gl/bgl.vue')
   }
 ]
 
