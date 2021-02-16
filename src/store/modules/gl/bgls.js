@@ -2,9 +2,9 @@ import axios from '@/axios.config.js'
 
 const state = {
     Bgls: [
-        { id: 1, text: "Project 1", kennung:"aaa" },
-        { id: 2, text: "Project 2", kennung:"bbb"  },
-        { id: 3, text: "Project 3", kennung:"ccc"  }
+        { id: 1, text: "Project 1", kennung:"0" },
+        { id: 2, text: "Project 2", kennung:"1"  },
+        { id: 3, text: "Project 3", kennung:"2"  }
     ]
 }
 
@@ -12,7 +12,6 @@ const state = {
 const getters = {
     allBgls: state => state.Bgls,
 }
-
 
 const actions = {
     async fetchBgls({commit}) {

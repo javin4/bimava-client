@@ -1,7 +1,4 @@
 import axios from '@/axios.config.js'
-//import myInterceptor from '@/axios.config.js'
-
-
 
 const state = {
     pphases: [

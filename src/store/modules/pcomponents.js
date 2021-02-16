@@ -22,7 +22,7 @@ const actions = {
     async fetchPComponents({commit}) {
         const response = await axios.get('/PComponents')
         console.log("fetching PComponents")
-        console.log(response.data)
+        //console.log(response.data)
         commit('setPComponents',response.data)
     },
 

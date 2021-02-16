@@ -116,7 +116,6 @@
         return this.getError(name) != null;
       },
       MySelection($event){
-        console.log($event.id)
         this.fetchPComponent($event.id)
       }
     },
@@ -127,7 +126,6 @@
       this.fetchPComponents(),
       this.unsubscribe = this.$store.subscribe((mutation) => {
         if (mutation.type === 'editPComponent') {
-          console.log("ssschanged"),
           this.fetchPComponents()
         }
       });

@@ -52,6 +52,11 @@ const routes = [
     path: '/bgl',
     name: 'bgl',
     component: () => import(/* webpackChunkName: "about" */ '../views/gl/bgl.vue')
+  },
+  {
+    path: '/costoverview',
+    name: 'costoverview',
+    component: () => import(/* webpackChunkName: "about" */ '../views/cost/overview.vue')
   }
 ]
 
