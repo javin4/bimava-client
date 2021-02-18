@@ -11,38 +11,44 @@
       <GridColumn field="name" title="Bezeichnung" width="400"></GridColumn>
       <GridColumn field="ehp_override" title="EHP" align="right"></GridColumn>
       <GridColumn field="ehp_result" title="Unit Cost" align="right"></GridColumn>
-      <GridColumn field="attr" title="Attribute" width="500"></GridColumn>
-      <GridColumn field="id" title="id" align="right" width="350"></GridColumn>
+      <!--<GridColumn field="attr" title="Attribute" width="500"></GridColumn>
+      <GridColumn field="id" title="id" align="right" width="350"></GridColumn>-->
         <template slot="detail" slot-scope="scope">
-          <div style="padding:2px 2px 2px 130px">
-            <DataGrid :data="scope.row.p_components" :footerData="footerData" :showFooter="true">
-              <GridColumn field="move" title="move" width="60">
-                <template slot="body" slot-scope="scope3">
-                <div class="item">  
-                  <button class="MoveUpDown" @click="moveComponent(scope.row.p_components, scope3.rowIndex, scope3.rowIndex-1)" :disabled="scope3.rowIndex==0">
-                    <i class="fas fa-arrow-up"></i>       
-                  </button>
-                  <button class="MoveUpDown" @click="moveComponent(scope.row.p_components, scope3.rowIndex, scope3.rowIndex+1)" :disabled="scope3.rowIndex == scope.row.p_components.length-1">
-                    <i class="fas fa-arrow-down"></i>
-                  </button>
-                </div>
-                </template>
-              </GridColumn>
-              <GridColumn field="kennung" title="Order ID"></GridColumn>
-              <GridColumn field="name" title="Bezeichnung"></GridColumn>
-              <GridColumn field="ehp_result" title="ehp_result">
-                <template slot="body" slot-scope="scope">
-                  <div class="item EUR">
-                    <div>{{ scope.row.ehp_result | toEUR}}</div>
+          <div style="padding:2px 2px 2px 160px">
+            <div class="column side">
+              <canvas id="myCanvas" width="250" height="100" style="border:1px solid #000000;">
+              </canvas> 
+            </div>
+            <div class="column middle">
+              <DataGrid :data="scope.row.p_components" :footerData="footerData" :showFooter="true">
+                <GridColumn field="move" title="move" width="60px">
+                  <template slot="body" slot-scope="scope3">
+                  <div class="item">  
+                    <button class="MoveUpDown" @click="moveComponent(scope.row.p_components, scope3.rowIndex, scope3.rowIndex-1)" :disabled="scope3.rowIndex==0">
+                      <i class="fas fa-arrow-up"></i>       
+                    </button>
+                    <button class="MoveUpDown" @click="moveComponent(scope.row.p_components, scope3.rowIndex, scope3.rowIndex+1)" :disabled="scope3.rowIndex == scope.row.p_components.length-1">
+                      <i class="fas fa-arrow-down"></i>
+                    </button>
                   </div>
-                </template>
-                <template slot="footer" slot-scope="scope">
-                  <div class="item EUR">
-                    <div>{{ scope.row.ehp_result | toEUR}}</div>
-                  </div>
-                </template>
-              </GridColumn>
-            </DataGrid>
+                  </template>               
+                </GridColumn>
+                <GridColumn field="kennung" title="Order ID" width="100px"></GridColumn>
+                <GridColumn field="name" title="Bezeichnung"></GridColumn>
+                <GridColumn field="ehp_result" title="ehp_result">
+                  <template slot="body" slot-scope="scope">
+                    <div class="item EUR">
+                      <div>{{ scope.row.ehp_result | toEUR}}</div>
+                    </div>
+                  </template>
+                  <template slot="footer" slot-scope="scope">
+                    <div class="item EUR">
+                      <div>{{ scope.row.ehp_result | toEUR}}</div>
+                    </div>
+                  </template>
+                </GridColumn>
+              </DataGrid>
+            </div>
           </div>
         </template>
     </DataGrid>
@@ -85,7 +91,7 @@ export default {
   },
   created() {
     this.fetchPek();
-  },
+  }
 };
 </script>
 
@@ -101,4 +107,29 @@ export default {
   .EUR {
     text-align: right;
   }
+
+
+  .column {
+  float: left;
+  
+}
+
+/* Left and right column */
+.column.side {
+  width: 25%;
+  background-color: brown;
+}
+
+/* Middle column */
+.column.middle {
+  width: 75%;
+  background-color: green;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
 </style>
